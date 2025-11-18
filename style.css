@@ -1,0 +1,875 @@
+/* style.css — Glass UI SPA dashboard (royal blue + light gold) */
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap');
+
+:root{
+  --royal-top: #203b9d;
+  --royal-bottom: #0f1f50;
+  --royal-mid: #2749b0;
+  --gold: #f0d890;
+  --glass: rgba(255,255,255,0.06);
+  --glass-border: rgba(255,255,255,0.12);
+  --text: #f7f9ff;
+  --muted: rgba(247,249,255,0.75);
+  --card-radius: 16px;
+  --shadow: 0 12px 36px rgba(6,12,40,0.45);
+}
+
+*{box-sizing:border-box}
+html,body{height:100%;margin:0;font-family:'Cairo',sans-serif;background: var(--royal-bottom) !important;color:var(--text);-webkit-font-smoothing:antialiased;}
+
+.container{max-width:1100px;margin:0 auto;padding:40px 20px 120px;text-align:right;}
+
+/* --- Titles --- */
+.page-title{font-size:24px;font-weight:700;color:var(--text);margin-bottom:25px;border-bottom:1px solid var(--glass-border);padding-bottom:15px;}
+.page-subtitle{font-size:20px;font-weight:600;color:var(--gold);margin-top:20px;margin-bottom:15px;}
+
+/* --- Cards Grid --- */
+.cards-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+@media (max-width: 768px) {
+    .cards-grid{grid-template-columns:1fr;} /* على الموبايل، عمود واحد */
+}
+
+.card{
+    background:var(--glass);
+    backdrop-filter:blur(8px);
+    border:1px solid var(--glass-border);
+    border-radius:var(--card-radius);
+    padding:25px;
+    text-align:right;
+    box-shadow:var(--shadow);
+    opacity:0;
+    transform:translateY(20px);
+    transition: all 0.4s ease-out; /* إضافة انتقال لـ banks.js */
+}
+
+.card-title{font-size:14px;color:var(--muted);margin-bottom:10px;}
+.card-amount{font-size:32px;font-weight:700;margin-bottom:10px;}
+.card-note{font-size:12px;color:var(--muted);margin-bottom:5px;}
+.card-update{font-size:11px;color:var(--gold);text-align:left;}
+
+/* --- Buttons and Inputs --- */
+.btn{
+    padding:12px 20px;
+    border:none;
+    border-radius:8px;
+    font-size:15px;
+    cursor:pointer;
+    transition:background 0.2s ease, transform 0.2s ease;
+    font-weight:600;
+    text-align:center;
+    text-decoration:none;
+    display:inline-block;
+}
+.btn.primary{background:var(--gold);color:var(--royal-bottom);}
+.btn.primary:hover{background:#f0e0a0;transform:translateY(-1px);}
+.btn.cancel{background:rgba(255,255,255,0.1);color:var(--text);}
+.btn.cancel:hover{background:rgba(255,255,255,0.2);transform:translateY(-1px);}
+.btn.btn-small{padding: 8px 14px; font-size: 13px;} /* زر صغير */
+
+
+.action-row{margin-top:20px;text-align:center;}
+
+/* --- Input Fields --- */
+.input-group {
+    margin-bottom: 15px;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 6px;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+input[type="text"], input[type="number"], .styled-select {
+    width: 100%;
+    padding: 12px 15px;
+    border-radius: 10px;
+    border: 1px solid var(--glass-border);
+    background: rgba(255, 255, 255, 0.08); 
+    color: var(--text);
+    font-size: 16px;
+    font-family: 'Cairo', sans-serif;
+    transition: all 0.2s ease;
+}
+
+.styled-select {
+    appearance: none;
+    background: rgba(255, 255, 255, 0.08) url("data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2220%22%20height%3D%2220%22%20viewBox%3D%220%200%2020%2020%22%3E%3Cpath%20fill%3D%22%23f7f9ff%22%20d%3D%22M4.5%207.5l5%205%205-5H4.5z%22%2F%3E%3C%2Fsvg%3E") no-repeat right 10px center;
+    background-size: 12px;
+    padding-left: 40px; /* مسافة للآيكون */
+}
+
+
+/* --- Bottom Navigation --- */
+.bottom-nav{
+    position:fixed;
+    bottom:0;
+    left:0;
+    right:0;
+    display:flex;
+    justify-content:space-around;
+    align-items:center;
+    height:70px;
+    background:rgba(0,0,0,0.5);
+    backdrop-filter:blur(10px);
+    border-top:1px solid var(--glass-border);
+    z-index:1000;
+}
+.nav-btn{
+    flex-grow:1;
+    text-align:center;
+    color:var(--muted);
+    font-size:12px;
+    font-weight:600;
+    text-decoration:none;
+    padding:10px 0;
+    transition:color 0.2s ease, background 0.2s ease;
+}
+.nav-btn:hover{color:var(--text);}
+.nav-btn.active{color:var(--gold);border-bottom:2px solid var(--gold);}
+
+/* --- Splash Screen --- */
+.splash{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background:linear-gradient(180deg,var(--royal-mid) 0%,var(--royal-bottom) 100%);
+    z-index:10000;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+}
+.splash-logo{
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+}
+.app-name{
+    font-size:40px;
+    font-weight:700;
+    color:var(--gold);
+    margin-bottom:15px;
+}
+.splash-tag{
+    font-size:16px;
+    color:var(--muted);
+    margin-top:10px;
+}
+.splash-credit {
+    font-size: 13px;
+    color: var(--muted);
+    margin-top: 8px;
+    opacity: 0.85;
+}
+.loading-dots span{
+    display:inline-block;
+    width:10px;
+    height:10px;
+    background:var(--gold);
+    border-radius:50%;
+    margin:0 5px;
+    animation:bounce 1.4s infinite ease-in-out both;
+}
+#splash-screen .splash-footer {
+  position: absolute;
+  bottom: 12px;
+  width: 100%;
+  text-align: center;
+  font-size: 0.9rem;
+  z-index: 9999999;
+  color: rgba(255,255,255,0.95);
+  opacity: 1; /* يظهر فوراً */
+}
+
+
+.loading-dots span:nth-child(1){animation-delay:-0.32s;}
+.loading-dots span:nth-child(2){animation-delay:-0.16s;}
+
+@keyframes bounce{
+    0%,80%,100%{transform:scale(0);}
+    40%{transform:scale(1);}
+}
+
+/* --- Notifications --- */
+.notification-container {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10000;
+}
+
+.custom-notification {
+    background: rgba(10, 10, 10, 0.9);
+    color: var(--text);
+    padding: 15px 20px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    opacity: 0;
+    transform: translateY(-20px);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.custom-notification.show {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.custom-notification.success {
+    border-left: 5px solid var(--gold);
+}
+
+.custom-notification.error {
+    background: rgba(150, 30, 30, 0.9);
+    border-left: 5px solid #ff5555;
+}
+
+/* --- تنسيقات خاصة بقوائم الأصول والديون (list-container) --- */
+
+.list-container {
+    list-style: none;
+    padding: 0;
+    margin-top: 20px;
+}
+
+.list-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    margin-bottom: 12px;
+    
+    /* تطبيق ثيم البطاقة على عناصر القائمة */
+    background: var(--glass); 
+    backdrop-filter: blur(8px);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--card-radius);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s ease;
+}
+
+.list-item:hover {
+    transform: translateY(-2px);
+}
+
+.debt-item div p {
+    margin: 4px 0 0 0;
+    font-size: 13px;
+    color: var(--muted);
+}
+
+.debt-total, .asset-total {
+    text-align: left; /* لضمان محاذاة الأزرار والعملة */
+}
+
+.value-yer {
+    display: block;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--gold);
+    margin-bottom: 5px;
+}
+
+/* تمييز الديون المستحقة لي (أصول) والديون المستحقة عليّ (خصوم) */
+.debt-to-me {
+    border-left: 5px solid #63c76c; /* أخضر فاتح */
+}
+.debt-by-me {
+    border-left: 5px solid #ff5555; /* أحمر تنبيه */
+}
+
+/* --- تنسيقات خاصة بصفحة الزكاة (zakat.html) والذهب (gold.html) --- */
+
+.zakat-summary, .zakat-result {
+    padding: 20px;
+    margin-bottom: 25px;
+    /* استخدام تنسيق البطاقة الأساسي */
+    background: var(--glass);
+    backdrop-filter: blur(8px);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--card-radius);
+    box-shadow: var(--shadow);
+}
+
+.zakat-summary h2, .zakat-result h2 {
+    font-size: 18px;
+    color: var(--gold);
+    margin-top: 0;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--glass-border);
+    margin-bottom: 15px;
+}
+
+.summary-item, .result-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+    font-size: 15px;
+}
+
+.total-net {
+    font-size: 17px !important;
+    font-weight: 600;
+    border-top: 1px dashed var(--muted);
+    margin-top: 10px;
+    padding-top: 10px !important;
+    color: var(--text);
+}
+
+.final-result strong {
+    font-size: 22px;
+    color: #63c76c; /* لون أخضر للزكاة المستحقة */
+    font-weight: 700;
+}
+
+.zakat-status {
+    margin-top: 20px;
+    padding: 10px;
+    text-align: center;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.1);
+}
+
+/* --- تنسيقات الأزرار العائمة (FAB) والمودال (Banks Page) --- */
+
+.fab {
+    position: fixed;
+    bottom: 90px;
+    left: 20px;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: var(--gold);
+    color: var(--royal-bottom);
+    font-size: 30px;
+    border: none;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    z-index: 999;
+    transition: transform 0.2s ease;
+}
+.fab:hover {
+    transform: scale(1.05);
+}
+
+/* المودال */
+.modal-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(5px);
+    z-index: 10001;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 0.3s, visibility 0.3s;
+}
+.modal-backdrop.active {
+    visibility: visible;
+    opacity: 1;
+}
+
+.modal {
+    background: var(--royal-bottom);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--card-radius);
+    padding: 30px;
+    width: 90%;
+    max-width: 500px;
+    box-shadow: var(--shadow);
+    transform: scale(0.9);
+    transition: transform 0.3s ease;
+}
+.modal-backdrop.active .modal {
+    transform: scale(1);
+}
+.modal h2 {
+    color: var(--gold);
+    font-size: 22px;
+    margin-top: 0;
+    border-bottom: 1px solid var(--glass-border);
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+}
+.modal-actions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 25px;
+}
+.currency-row {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    margin-bottom: 15px;
+}
+.currency-row select, .currency-row input[type="number"] {
+    flex-grow: 1;
+}
+.add-row-btn {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--text);
+    padding: 10px;
+    border: 1px dashed var(--glass-border);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+.add-row-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+/* تعديل عرض المودال الصغير للحذف */
+.modal.small {
+    max-width: 350px;
+    text-align: center;
+}
+.modal.small .modal-actions {
+    justify-content: space-around;
+}
+/* ==== بطاقة الملخص (عرض كامل بصفين) ==== */
+.summary-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 25px;
+    margin-bottom: 25px;
+}
+
+@media (max-width: 900px) {
+    .summary-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ==== نموذج الإضافة عرض كامل ==== */
+.form-card {
+    width: 100%;
+    margin-bottom: 25px;
+}
+
+/* ==== تحسين مدخلات النموذج ==== */
+.form-card .input-group input,
+.form-card .input-group select {
+    width: 100%;
+    margin-top: 4px;
+}
+
+/* ==== قائمة الديون ==== */
+.debts-list-container {
+    width: 100%;
+}
+
+/* ==== حل مشكلة navbar المختفي ==== */
+body {
+    padding-bottom: 120px;
+}
+/* شبكة عمودين تحت البطاقات */
+.debt-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 25px;
+    margin-top: 20px;
+}
+
+@media (max-width: 900px) {
+    .debt-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* تحسين شكل النموذج */
+.form-card input,
+.form-card select {
+    width: 100%;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.15);
+    padding: 10px;
+    border-radius: 10px;
+    color: var(--text);
+    transition: 0.3s;
+}
+
+.form-card input:focus,
+.form-card select:focus {
+    border-color: var(--gold);
+    background: rgba(255,255,255,0.12);
+}
+
+/* جعل select متناسق مع الثيم */
+.styled-select {
+    appearance: none;
+    background-image: url('data:image/svg+xml;utf8,<svg fill="white" height="24" width="24" viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg>');
+    background-repeat: no-repeat;
+    background-position: left 10px center;
+    padding-left: 35px;
+}
+
+/* بطاقة الديون في العمود الثاني */
+.debts-list-container {
+    margin-top: 10px;
+}
+
+.debt-item {
+    opacity: 1 !important;
+    transform: none !important;
+    margin-bottom: 18px;
+    padding: 18px;
+    border-radius: 14px;
+}
+
+/* توحيد التباعد داخل الحقول */
+.input-group {
+    margin-bottom: 12px;
+}
+/* ===== البطاقات العلوية ===== */
+.summary-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 25px;
+    margin-bottom: 30px;
+}
+
+@media (max-width: 900px) {
+    .summary-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ===== نموذج إضافة دين بعرض كامل ===== */
+.form-full {
+    width: 100%;
+    margin-bottom: 30px;
+}
+
+/* تحسين مدخلات النموذج */
+.form-full input,
+.form-full select {
+    width: 100%;
+    padding: 12px;
+    border-radius: 10px;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.15);
+    margin-top: 5px;
+    color: var(--text);
+}
+
+.form-full input:focus,
+.form-full select:focus {
+    background: rgba(255,255,255,0.12);
+    border-color: var(--gold);
+}
+
+/* تنسيق select ليطابق الثيم */
+.styled-select {
+    appearance: none;
+    background-image: url('data:image/svg+xml;utf8,<svg fill="white" height="22" width="22" viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg>');
+    background-repeat: no-repeat;
+    background-position: left 10px center;
+    padding-left: 35px;
+}
+
+/* ===== قائمة الديون (عرض كامل) ===== */
+.full-width {
+    width: 100%;
+}
+
+.debt-item {
+    opacity: 1 !important;
+    transform: none !important;
+    margin-bottom: 18px;
+    padding: 18px;
+    border-radius: 14px;
+}
+/* ====== شريط التنقل السفلي الفاخر ====== */
+
+.bottom-nav {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    height: 70px;
+    background: #061638;
+    border-top: 1px solid rgba(255,255,255,0.06);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    z-index: 2000;
+    backdrop-filter: blur(10px);
+}
+
+.bottom-nav a {
+    color: var(--text);
+    text-decoration: none;
+    font-size: 14px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 6px 10px;
+    position: relative;
+    opacity: 0.75;
+    transition: 0.25s ease;
+}
+
+.bottom-nav a .nav-icon {
+    width: 18px;
+    height: 18px;
+    margin-bottom: 4px;
+    opacity: 0.85;
+}
+
+.bottom-nav a:hover {
+    opacity: 1;
+}
+
+/* ===== تحديد الصفحة النشطة ===== */
+
+.bottom-nav a.active {
+    opacity: 1;
+}
+
+.bottom-nav a.active::after {
+    content: "";
+    position: absolute;
+    bottom: -2px;
+    width: 40%;
+    height: 3px;
+    background: var(--gold);
+    border-radius: 3px;
+    right: 0;
+    left: 0;
+    margin: auto;
+}
+/* تحسين صفحة الزكاة لتكون متوافقة مع الجوال */
+
+/* جعل الكروت تأخذ كامل العرض بدون تمدد زائد */
+.zakat-summary,
+.zakat-result {
+    width: 100%;
+    padding: 18px;
+    margin-bottom: 25px;
+}
+
+/* تصغير العناوين على الشاشات الصغيرة */
+@media (max-width: 600px) {
+    .page-title {
+        font-size: 22px;
+        text-align: center;
+    }
+
+    .zakat-summary h2,
+    .zakat-result h2 {
+        font-size: 18px;
+        text-align: center;
+    }
+
+    .summary-item,
+    .result-item {
+        flex-direction: column;
+        text-align: center;
+        gap: 5px;
+    }
+
+    .summary-item span,
+    .result-item span {
+        font-size: 15px;
+    }
+
+    .summary-item strong,
+    .result-item strong {
+        font-size: 18px;
+    }
+
+    .final-result strong {
+        font-size: 22px !important;
+    }
+
+    #zakat-status {
+        font-size: 14px;
+        padding: 10px;
+    }
+}
+/* 🔧 إصلاح صفحة الذهب لتكون Responsive على الجوال */
+
+/* كسر الـ inline grid-template على الموبايل */
+@media (max-width: 768px) {
+
+    /* كروت أسعار الذهب */
+    .cards-grid[style*="repeat(3"] {
+        grid-template-columns: 1fr !important;
+    }
+
+    /* كروت النتيجة (2 أعمدة → عمود واحد) */
+    .cards-grid[style*="repeat(2"] {
+        grid-template-columns: 1fr !important;
+    }
+.main-loaded .cards-grid {
+  opacity: 1;
+  transition: opacity 0.2s ease-out;
+}
+
+.cards-grid {
+  opacity: 0;
+}
+
+    /* حقول الإدخال داخل البطاقة */
+    #goldForm .input-group input {
+        font-size: 16px;
+        padding: 12px;
+    }
+
+    /* البطاقات نفس ارتفاع وصفحة الديون */
+    .cards-grid .card {
+        padding: 20px;
+        margin-bottom: 15px;
+    }
+
+    /* العناوين وسط */
+    .page-title,
+    .page-subtitle {
+        text-align: center;
+    }
+
+    /* تصغير الخط الكبير */
+    .card-amount {
+        font-size: 24px !important;
+    }
+}
+.toggle-setting {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 15px 0;
+}
+
+.toggle-setting input {
+    display: none;
+}
+
+.toggle-slider {
+    width: 50px;
+    height: 26px;
+    background: #777;
+    border-radius: 20px;
+    position: relative;
+    cursor: pointer;
+    transition: .3s ease;
+}
+
+.toggle-slider::after {
+    content: "";
+    width: 22px;
+    height: 22px;
+    background: white;
+    border-radius: 50%;
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    transition: .3s ease;
+}
+
+.toggle-setting input:checked + .toggle-slider {
+    background: var(--royal-accent, #f5c96d);
+}
+
+.toggle-setting input:checked + .toggle-slider::after {
+    transform: translateX(24px);
+}
+
+.toggle-label {
+    font-size: 15px;
+}
+/* ===========================
+   🔥 شريط التنقّل الجديد (Responsive + Elegant)
+   =========================== */
+
+.bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 65px;
+    background: rgba(5, 20, 50, 0.95);
+    backdrop-filter: blur(12px);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    z-index: 9999;
+}
+
+.bottom-nav a {
+    flex: 1;
+    text-align: center;
+    text-decoration: none;
+    color: #d0d8f0;
+    font-size: 12px;
+    font-weight: 500;
+    padding: 6px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: 0.25s ease;
+}
+
+/* الأيقونات */
+.bottom-nav a .icon {
+    font-size: 22px;
+    line-height: 24px;
+    margin-bottom: 2px;
+    transition: transform .25s ease, opacity .25s ease;
+}
+
+/* العنصر النشط */
+.bottom-nav a.active {
+    color: #ffe28a;
+    font-weight: 700;
+}
+
+.bottom-nav a.active .icon {
+    transform: translateY(-2px) scale(1.18);
+}
+
+/* تأثير اللمس */
+.bottom-nav a:active {
+    opacity: 0.5;
+}
+
+/* شاشات الجوال الصغيرة جداً */
+@media (max-width: 380px) {
+    .bottom-nav {
+        height: 60px;
+    }
+    .bottom-nav a .icon {
+        font-size: 20px;
+    }
+    .bottom-nav a {
+        font-size: 11px;
+    }
+}
+
+/* الوضع الأفقي للجوال */
+@media (orientation: landscape) and (max-height: 450px) {
+    .bottom-nav {
+        height: 55px;
+    }
+    .bottom-nav a .icon {
+        font-size: 18px;
+    }
+    .bottom-nav a {
+        font-size: 10px;
+    }
+}
