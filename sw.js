@@ -3,25 +3,25 @@ const CACHE_NAME = `${CACHE_VERSION}-cache`;
 
 const ASSETS = [
   "/",
-  "/index.html",
-  "/banks.html",
-  "/gold.html",
-  "/zakat.html",
-  "/debts.html",
-  "/settings.html",
-  "/backup.html",
+  "./index.html",
+  "./banks.html",
+  "./gold.html",
+  "./zakat.html",
+  "./debts.html",
+  "./settings.html",
+  "./backup.html",
 
-  "/style.css",
-  "/core_logic.js",
-  "/banks.js",
-  "/debts.js",
-  "/gold.js",
-  "/zakat.js",
-  "/settings.js",
-  "/backups.js",
+  "./style.css",
+  "./core_logic.js",
+  "./banks.js",
+  "./debts.js",
+  "./gold.js",
+  "./zakat.js",
+  "./settings.js",
+  "./backups.js",
 
-  "/icons/wallet-icon-192.png",
-  "/icons/wallet-icon-512.png"
+  "./icons/wallet-icon-192.png",
+  "./icons/wallet-icon-512.png"
 ];
 
 // Install Service Worker
@@ -75,4 +75,5 @@ self.addEventListener("activate", event => {
     )
   );
 });
+
 
